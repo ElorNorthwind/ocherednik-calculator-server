@@ -28,11 +28,27 @@ function getAdressName(node: HTMLElement): string {
 }
 
 function getAo(node: HTMLElement): string {
-  return node?.querySelector("div.inside-caption h2.tClr2")?.rawText?.match(/\((.*),/i)?.[1] || "";
+  const longAo = node?.querySelector("div.inside-caption h2.tClr2")?.rawText?.match(/\((.*),/i)?.[1] || "";
+  return AoShortened[longAo] || "";
 }
 
+const AoShortened: Record<string, string> = {
+  "Центральный Административный Округ": "ЦАО",
+  "Северный Административный Округ": "САО",
+  "Северо-Восточный Административный Округ": "СВАО",
+  "Восточный Административный Округ": "ВАО",
+  "Юго-Восточный Административный Округ": "ЮВАО",
+  "Южный Административный Округ": "ЮАО",
+  "Юго-Западный Административный Округ": "ЮЗАО",
+  "Западный Административный Округ": "ЗАО",
+  "Северо-Западный Административный Округ": "СЗАО",
+  "Зеленоградский Административный Округ": "ЗелАО",
+  "Троицкой Административный Округ": "ТАО",
+  "Новомосковский Административный Округ": "НАО",
+};
+
 function getArea(node: HTMLElement): string {
-  return node?.querySelector("div.inside-caption h2.tClr2")?.rawText?.match(/, (.*)\)/i)?.[1] || "";
+  return node?.querySelector("div.inside-caption h2.tClr2")?.rawText?.match(/, район (.*)\)/i)?.[1] || "";
 }
 
 function getYear(node: HTMLElement): string {
