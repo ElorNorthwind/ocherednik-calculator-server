@@ -2,6 +2,7 @@ import express, { Express, Request, Response } from "express";
 import dotenv from "dotenv";
 import router from "./routes/index.router.js";
 import cors from "cors";
+import errorMiddleware from "./middlewares/error.middleware.js";
 
 dotenv.config();
 
@@ -17,6 +18,7 @@ app.use(
 );
 
 app.use("/", router);
+app.use(errorMiddleware); //Обязательно последним
 
 // app.get("/", (req: Request, res: Response) => {
 //   res.send("welcome to api. What are you doing here, weary traveller?");
